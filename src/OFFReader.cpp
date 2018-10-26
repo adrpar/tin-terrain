@@ -181,7 +181,7 @@ bool OFFReader::parse(FileLike& in)
         for(int i = 0; i < m_num_vertices; i++)
         {
             Vertex& v = m_vertices[i];
-            if(readVertex(readLine, v, tokens) != true)
+            if(!readVertex(readLine, v, tokens))
             {
                 TNTN_LOG_WARN("could not read vertex {} line: {}", i, readLine);
             }

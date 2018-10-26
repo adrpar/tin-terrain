@@ -172,7 +172,7 @@ static void get_xy_values_from_points(const std::vector<Vertex>& points,
     std::unordered_set<double> x_values_set;
     std::unordered_set<double> y_values_set;
 
-    x_values_set.reserve(sqrt(points.size()) + 1);
+    x_values_set.reserve(static_cast<unsigned long>(sqrt(points.size()) + 1));
     y_values_set.reserve(sqrt(points.size()) + 1);
 
     for(const auto& p : points)

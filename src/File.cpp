@@ -201,7 +201,7 @@ File::File() : m_impl(std::make_unique<FileImpl>()) {}
 
 File::~File()
 {
-	m_impl->close();
+    m_impl->close();
 }
 
 bool File::open(const char* filename, OpenMode open_mode)
@@ -341,7 +341,7 @@ bool MemoryFile::write(position_type to_offset_ui64, const unsigned char* data, 
         }
     }
     memcpy(m_data.data() + to_offset, data, data_size);
-    return data_size;
+    return data_size > 0;
 }
 
 FileLike::position_type getline(FileLike::position_type from_offset,

@@ -27,10 +27,9 @@ TEST_CASE("SuperTriangle test", "[tntn]")
 
     SuperTriangle t(v1, v2, v3);
 
-    bool inside = false;
     double ih;
 
-    inside = t.interpolate(0.5, 0.5, ih);
+    t.interpolate(0.5, 0.5, ih);
     TNTN_LOG_DEBUG("ih: {}", ih);
 
     CHECK(ih == z);

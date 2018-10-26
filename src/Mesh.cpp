@@ -111,7 +111,7 @@ void Mesh::generate_decomposed()
     TNTN_LOG_DEBUG("generate decomposed...");
 
     m_faces.reserve(m_triangles.size());
-    m_vertices.reserve(m_triangles.size() * 0.66);
+    m_vertices.reserve(static_cast<unsigned long>(m_triangles.size() * 0.66));
 
     std::unordered_map<Vertex, VertexIndex> vertex_lookup;
     vertex_lookup.reserve(m_vertices.capacity());

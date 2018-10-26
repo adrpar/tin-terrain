@@ -296,14 +296,7 @@ struct EdgeCompareLess
         }
         else /*if(lmin == rmin)*/
         {
-            if(lmax < rmax)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return lmax < rmax;
         }
     }
 };

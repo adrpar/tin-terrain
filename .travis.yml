@@ -67,6 +67,7 @@ matrix:
         - BUILD_TYPE="Debug"
         - BUILD_FLAGS="-fsanitize=address"
         - CMAKE_FLAGS=""
+        - LDFLAGS="-shared-libasan"
         - TEST_TASK="test"
     - name: "Linux gcc debug fsanitize"
       os: linux
@@ -88,7 +89,8 @@ matrix:
         - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
         - BUILD_TYPE="Debug"
         - BUILD_FLAGS="-fsanitize=address -fuse-ld=gold"
-        - CMAKE_FLAGS=""
+        - CMAKE_FLAGS="-DCMAKE_EXE_LINKER_FLAGS='-lasan'"
+        - LDFLAGS="-lasan"
         - TEST_TASK="test"
     - name: "Linux clang release"
       os: linux

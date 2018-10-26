@@ -142,8 +142,7 @@ void Mesh2Raster::rasterise_triangle(RasterDouble& raster, SuperTriangle& tri)
     @param original_width - width of original rast
     @return rasterised mesh
     */
-RasterDouble Mesh2Raster::rasterise(
-    Mesh& mesh, int out_width, int out_height, int original_width, int original_height)
+RasterDouble Mesh2Raster::rasterise(Mesh& mesh, int out_width, int out_height, int original_width)
 {
     m_bb = findBoundingBox(mesh);
 
@@ -158,6 +157,13 @@ RasterDouble Mesh2Raster::rasterise(
     }
 
     if(original_width == -1) original_width = out_width;
+
+    if(original_width <= 2)
+    {
+        TNTN_LOG_ERROR(
+            "original mesh dimensions is too small. the original mesh needs to have at least 3 pixels.");
+        return raster;
+    }
 
     double cellSize_original = mesh_w / (double)(original_width - 1);
     double cellSize = (mesh_w + cellSize_original) / (double)(out_width);
@@ -342,7 +348,7 @@ double Mesh2Raster::findRMSError(const RasterDouble& r1,
     if(count > 0)
     {
         sum = sum / (long double)count;
-        sum = sqrt(sum);
+        sum = sqrt(static_cast<double>(sum));
     }
 
     return sum;

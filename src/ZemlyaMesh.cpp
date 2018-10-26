@@ -77,8 +77,8 @@ void ZemlyaMesh::greedy_insert(double max_error)
                 }
                 else
                 {
-                    int co = pow(2, step - 1); // offset
-                    int d = pow(2, step - 2); // delta
+                    int64_t co = static_cast<int64_t>(pow(2, step - 1)); // offset
+                    int64_t d = static_cast<int64_t>(pow(2, step - 2)); // delta
 
                     double v1 = y + co - d < h && x + co - d < w
                         ? m_sample.value(y + co - d, x + co - d)
@@ -167,7 +167,7 @@ void ZemlyaMesh::greedy_insert(double max_error)
             {
                 for(int x = 0; x < w; x += pow(2, step))
                 {
-                    int co = pow(2, step - 1); // current step's offset
+                    int64_t co = static_cast<int64_t>(pow(2, step - 1)); // current step's offset
                     if(y + co < h && x + co < w)
                     {
                         m_insert.value(y + co, x + co) = m_raster->value(y + co, x + co);
@@ -195,8 +195,9 @@ void ZemlyaMesh::greedy_insert(double max_error)
                             continue;
                         }
 
-                        const double v1 =
-                            y - d < h && x - d < w ? m_sample.value(y - d, x - d) : NAN;
+                        const double v1 = y - d < h && x - d < w
+                            ? m_sample.value(static_cast<const unsigned int>(y - d), x - d)
+                            : NAN;
                         const double v2 =
                             y - d < h && x + d < w ? m_sample.value(y - d, x + d) : NAN;
                         const double v3 =

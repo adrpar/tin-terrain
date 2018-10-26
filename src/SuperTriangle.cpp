@@ -42,10 +42,7 @@ bool SuperTriangle::interpolate(const double x, const double y, double& z)
 
     z = (double)(v1.z * w1 + v2.z * w2 + v3.z * w3);
 
-    if(0 <= w1 && w1 <= 1 && 0 <= w2 && w2 <= 1 && 0 <= w3 && w3 <= 1)
-        return true;
-    else
-        return false;
+    return 0 <= w1 && w1 <= 1 && 0 <= w2 && w2 <= 1 && 0 <= w3 && w3 <= 1;
 }
 
 void SuperTriangle::rasterise(RasterDouble& raster)

@@ -270,5 +270,7 @@ inline bool leftOf(const Point2D& x, qe_ptr e)
     return leftOf(x, e->Org(), e->Dest());
 }
 
+void splice(qe_ptr a, qe_ptr b);
+
 } //namespace terra
 } //namespace tntn

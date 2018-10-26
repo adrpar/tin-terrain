@@ -361,7 +361,7 @@ class BenchmarkMeshingMethodRegular : public BenchmarkMeshingMethod
 
     std::string name() const override { return "regular"; }
 
-    int get_num_parametrizations() const override { return param_step.size(); }
+    int get_num_parametrizations() const override { return static_cast<int>(param_step.size()); }
 
     SurfaceDescription transform_to_preferred(SurfaceDescription&& old) const override
     {
@@ -519,7 +519,7 @@ class BenchmarkMeshingMethodTerraLike : public BenchmarkMeshingMethod
     {
         m_stats_row.method_name = name();
 
-        double max_error = -1;
+        double max_error;
         if(parametrization < 0 && parametrization >= param_max_error.size())
         {
             TNTN_LOG_ERROR("invalid parametrization {}", parametrization);
@@ -880,7 +880,7 @@ static bool run_all_dem2tin_method_benchmarks_on_single_file(
             Mesh2Raster rasteriser;
             TNTN_LOG_INFO("rasterising resulting mesh to evaluate error...");
             auto raster_from_mesh = rasteriser.rasterise(
-                *mesh, original_raster->get_width(), original_raster->get_height());
+                *mesh, original_raster->get_width(), original_raster->get_height(), 0);
             if(raster_from_mesh.empty())
             {
                 TNTN_LOG_ERROR("rasterised mesh empty, unable to calculate errors");

@@ -147,7 +147,7 @@ static void add_alignment(BinaryIO& bio,
                           const uint8_t value = 0xCA)
 {
     const auto sp = bio.write_pos();
-    const int pad_size = sp % alignment == 0 ? 0 : alignment - (sp % alignment);
+    FileLike::position_type pad_size = sp % alignment == 0 ? 0 : alignment - (sp % alignment);
 
     for(int i = 0; i < pad_size; i++)
     {

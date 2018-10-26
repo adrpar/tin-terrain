@@ -1,5 +1,6 @@
 #include "tntn/DelaunayMesh.h"
 #include "tntn/DelaunayTriangle.h"
+#include "tntn/QuadEdge.h"
 
 namespace tntn {
 namespace terra {

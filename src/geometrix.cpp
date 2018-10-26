@@ -26,11 +26,7 @@ bool triangle_semantic_equal::operator()(const Triangle& l, const Triangle& _r) 
         return true;
     }
     std::rotate(r.begin(), r.begin() + 1, r.end());
-    if(l == r)
-    {
-        return true;
-    }
-    return false;
+    return l == r;
 #else
     //compare winding
     const glm::dvec3 ln = glm::triangleNormal(l[0], l[1], l[2]);

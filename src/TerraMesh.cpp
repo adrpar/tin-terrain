@@ -136,7 +136,7 @@ void TerraMesh::scan_triangle(dt_ptr t)
         double x1 = v0_x;
         double x2 = v0_x;
 
-        const int starty = v0_y;
+        const int starty = static_cast<const int>(v0_y);
         const int endy = v1_y;
 
         for(int y = starty; y < endy; y++)

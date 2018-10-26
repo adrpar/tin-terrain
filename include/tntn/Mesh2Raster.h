@@ -10,11 +10,7 @@ class Mesh2Raster
 {
 
   public:
-    RasterDouble rasterise(Mesh& mesh,
-                           int out_width,
-                           int out_height,
-                           int original_width = -1,
-                           int original_height = -1);
+    RasterDouble rasterise(Mesh& mesh, int out_width, int out_height, int original_width = -1);
     void rasterise_triangle(RasterDouble& raster, SuperTriangle& tri);
 
     static double findRMSError(const RasterDouble& r1,

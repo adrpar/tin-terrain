@@ -134,7 +134,7 @@ bool Delaunator::triangulate(const vector<double>& coords)
     halfedges.clear();
 
     //coords = move(in_coords);
-    const int64_t n = coords.size() / 2;
+    const uint64_t n = coords.size() / 2;
     double max_x = -1 * max_double;
     double max_y = -1 * max_double;
     double min_x = max_double;
@@ -226,7 +226,7 @@ bool Delaunator::triangulate(const vector<double>& coords)
     {
         const double tmp = i1;
         i1 = i2;
-        i2 = tmp;
+        i2 = (uint64_t)tmp;
     }
 
     const double i0x = coords[2 * i0];
@@ -238,11 +238,11 @@ bool Delaunator::triangulate(const vector<double>& coords)
 
     tie(m_center_x, m_center_y) = circumcenter(i0x, i0y, i1x, i1y, i2x, i2y);
 
-    std::sort(ids.begin(), ids.end(), [&](int64_t i, int64_t j) {
+    std::sort(ids.begin(), ids.end(), [&](uint64_t i, uint64_t j) {
         return compare(coords, i, j, m_center_x, m_center_y) < 0;
     });
 
-    m_hash_size = ceil(sqrt(n));
+    m_hash_size = static_cast<int64_t>(ceil(sqrt(n)));
     m_hash.reserve(m_hash_size);
     for(int64_t i = 0; i < m_hash_size; i++)
         m_hash.push_back(-1);
@@ -282,7 +282,7 @@ bool Delaunator::triangulate(const vector<double>& coords)
 
         const int64_t start_key = hash_key(x, y);
         int64_t key = start_key;
-        int64_t start = -1;
+        int64_t start;
         do
         {
             assert(key >= 0 && key < m_hash.size());
@@ -511,12 +511,12 @@ void Delaunator::link(int64_t a, int64_t b)
     }
     if(b != -1)
     {
-        int64_t s = halfedges.size();
-        if(b == s)
+        int64_t halfedge_size = halfedges.size();
+        if(b == halfedge_size)
         {
             halfedges.push_back(a);
         }
-        else if(b < s)
+        else if(b < halfedge_size)
         {
             halfedges[b] = a;
         }

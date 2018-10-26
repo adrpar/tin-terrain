@@ -111,7 +111,7 @@ TEST_CASE("mesh 2 raster", "[tntn]")
 
     CHECK(raster_4.get_cell_size() == 1);
 
-    RasterDouble raster_10 = m2r.rasterise(m, 10, 10, 4, 4);
+    RasterDouble raster_10 = m2r.rasterise(m, 10, 10, 4);
 
     CHECK(raster_10.get_cell_size() == 0.4);
 }

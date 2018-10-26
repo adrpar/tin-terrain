@@ -268,7 +268,8 @@ static inline double average_nan_arr(const std::array<double, Size>& to_average)
 static inline double safe_get_pixel(
     const RasterDouble& src, const int64_t w, const int64_t h, const int64_t r, const int64_t c)
 {
-    return r >= 0 && r < h && c >= 0 && c < w ? src.value(r, c) : NAN;
+    return r >= 0 && r < h && c >= 0 && c < w ? src.value(static_cast<const unsigned int>(r), c)
+                                              : NAN;
 }
 
 static double subsample_raster_3x3(const RasterDouble& src,
@@ -373,10 +374,10 @@ double raster_tools::sample_nearest_valid_avg(const RasterDouble& src,
                                                                                       int y) {
         const int64_t dest_r = row + y;
         const int64_t dest_c = column + x;
-        double z = subsample_raster_3x3(src, no_data_value, w, h, dest_r, dest_c);
-        if(!is_no_data(z, no_data_value))
+        double subsampled_raster = subsample_raster_3x3(src, no_data_value, w, h, dest_r, dest_c);
+        if(!is_no_data(subsampled_raster, no_data_value))
         {
-            to_average[avg_count] = z;
+            to_average[avg_count] = subsampled_raster;
             avg_count++;
         }
     };
